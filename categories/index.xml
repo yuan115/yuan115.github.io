@@ -6,7 +6,7 @@
     <description>Recent content in Categories on yuan&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 29 Oct 2019 10:07:47 +0600</lastBuildDate>
+    <lastBuildDate>Fri, 19 Jun 2020 16:04:21 +0800</lastBuildDate>
     
 	<atom:link href="https://yuan115.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>Go Language</title>
       <link>https://yuan115.github.io/categories/go-language/</link>
-      <pubDate>Tue, 29 Oct 2019 10:07:47 +0600</pubDate>
+      <pubDate>Fri, 19 Jun 2020 16:04:21 +0800</pubDate>
       
       <guid>https://yuan115.github.io/categories/go-language/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test</title>
+      <link>https://yuan115.github.io/categories/test/</link>
+      <pubDate>Fri, 19 Jun 2020 16:04:21 +0800</pubDate>
+      
+      <guid>https://yuan115.github.io/categories/test/</guid>
       <description></description>
     </item>
     
