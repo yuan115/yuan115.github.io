@@ -157,59 +157,59 @@
  </p>
 <p><strong>以下為專案內容：</strong></p>
 <h6 id="import-data">import data</h6>
-<pre><code class="language-{r}" data-lang="{r}">data(&quot;Boston&quot;)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#0a0">data</span>(<span style="color:#a50">&#34;Boston&#34;</span>)
 df &lt;- Boston
 
-str(df)
-</code></pre><p><img src="/images/post/str(df).jpg" alt="image"></p>
-<pre><code class="language-{r}" data-lang="{r}">hist(df$age, col = &quot;green&quot;)
-</code></pre><p><img src="/images/post/hist.jpg" alt="image"></p>
-<pre><code class="language-{r}" data-lang="{r}">summary(df)
-</code></pre><p><img src="/images/post/summary(df).jpg" alt="image"></p>
+<span style="color:#0a0">str</span>(df)
+</code></pre></div><p><img src="/images/post/str(df).jpg" alt="image"></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#0a0">hist</span>(df$age, col = <span style="color:#a50">&#34;green&#34;</span>)
+</code></pre></div><p><img src="/images/post/hist.jpg" alt="image"></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#0a0">summary</span>(df)
+</code></pre></div><p><img src="/images/post/summary(df).jpg" alt="image"></p>
 <h6 id="sample">sample</h6>
-<pre><code class="language-{r}" data-lang="{r}"># approach 1
-nrow(df)
-rows &lt;- sample(1:nrow(df), nrow(df) * .8, replace = F)
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#aaa;font-style:italic"># approach 1</span>
+<span style="color:#0a0">nrow</span>(df)
+rows &lt;- <span style="color:#0a0">sample</span>(<span style="color:#099">1</span>:<span style="color:#0a0">nrow</span>(df), <span style="color:#0a0">nrow</span>(df) * <span style="color:#099">.8</span>, replace = F)
 
 train_base &lt;- df[rows, ]
 test_base &lt;- df[-rows, ]
 
-# check our data
-dim(train_base)
-dim(test_base)
+<span style="color:#aaa;font-style:italic"># check our data</span>
+<span style="color:#0a0">dim</span>(train_base)
+<span style="color:#0a0">dim</span>(test_base)
 
-# approach 2
-rows2 &lt;- createDataPartition(df$age, times = 1, p =.8, list = F)
+<span style="color:#aaa;font-style:italic"># approach 2</span>
+rows2 &lt;- <span style="color:#0a0">createDataPartition</span>(df$age, times = <span style="color:#099">1</span>, p =<span style="color:#099">.8</span>, list = F)
 
 training &lt;- df[rows2, ]
 testing &lt;- df[-rows2, ]
 
-# check our data
-dim(training)
-dim(testing)
-</code></pre><h6 id="construct-three-different-types-of-model">Construct three different types of model</h6>
-<pre><code class="language-{r}" data-lang="{r}">model &lt;- function(method) {
-  train(age ~ .,
+<span style="color:#aaa;font-style:italic"># check our data</span>
+<span style="color:#0a0">dim</span>(training)
+<span style="color:#0a0">dim</span>(testing)
+</code></pre></div><h6 id="construct-three-different-types-of-model">Construct three different types of model</h6>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">model &lt;- <span style="color:#0a0">function</span>(method) {
+  <span style="color:#0a0">train</span>(age ~ .,
         data = training,
         method = method,
-        trControl = trainControl(method = &quot;repeatedcv&quot;,
-                                 number = 2,
-                                 repeats = 2))
+        trControl = <span style="color:#0a0">trainControl</span>(method = <span style="color:#a50">&#34;repeatedcv&#34;</span>,
+                                 number = <span style="color:#099">2</span>,
+                                 repeats = <span style="color:#099">2</span>))
 }
 
-model_lm &lt;- model(method = &quot;lm&quot;)
-model_rf &lt;- model(method = &quot;ranger&quot;)
-model_gbm &lt;- model(method = &quot;gbm&quot;)
-</code></pre><h6 id="compare-model">Compare model</h6>
-<pre><code class="language-{r}" data-lang="{r}">sample &lt;- resamples(list(Liner = model_lm,
+model_lm &lt;- <span style="color:#0a0">model</span>(method = <span style="color:#a50">&#34;lm&#34;</span>)
+model_rf &lt;- <span style="color:#0a0">model</span>(method = <span style="color:#a50">&#34;ranger&#34;</span>)
+model_gbm &lt;- <span style="color:#0a0">model</span>(method = <span style="color:#a50">&#34;gbm&#34;</span>)
+</code></pre></div><h6 id="compare-model">Compare model</h6>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">sample &lt;- <span style="color:#0a0">resamples</span>(<span style="color:#0a0">list</span>(Liner = model_lm,
                          Forest = model_rf,
                          GBM = model_gbm))
-bwplot(sample)
-</code></pre><p><img src="/images/post/bwplot(sample).jpg" alt="image"></p>
-<pre><code class="language-{r}" data-lang="{r}">dotplot(sample)
-</code></pre><p><img src="/images/post/dotplot(sample).jpg" alt="image"></p>
-<pre><code class="language-{r}" data-lang="{r}">summary(sample)
-</code></pre><p><img src="/images/post/summary(sample).jpg" alt="image"></p>
+<span style="color:#0a0">bwplot</span>(sample)
+</code></pre></div><p><img src="/images/post/bwplot(sample).jpg" alt="image"></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#0a0">dotplot</span>(sample)
+</code></pre></div><p><img src="/images/post/dotplot(sample).jpg" alt="image"></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#0a0">summary</span>(sample)
+</code></pre></div><p><img src="/images/post/summary(sample).jpg" alt="image"></p>
 <p> </p>
 <h6 id="補充">補充：</h6>
 <ol>
